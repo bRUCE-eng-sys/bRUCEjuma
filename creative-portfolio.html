@@ -1,0 +1,1024 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bruce Juma</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --bg-primary: #0a0e27;
+            --bg-secondary: #1a1f3a;
+            --bg-tertiary: #242d52;
+            --accent-primary: #00ff88;
+            --accent-secondary: #ff006e;
+            --accent-tertiary: #00d4ff;
+            --text-primary: #ffffff;
+            --text-secondary: #a0aec0;
+            --border-color: #2d3748;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'JetBrains Mono', 'Courier New', monospace;
+            background: linear-gradient(135deg, var(--bg-primary) 0%, var(--bg-secondary) 50%, var(--bg-tertiary) 100%);
+            color: var(--text-primary);
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        /* Animated background particles */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                radial-gradient(circle at 20% 50%, rgba(19, 40, 161, 0.08) 0%, transparent 50%),
+                radial-gradient(circle at 80% 80%, rgba(9, 6, 54, 0.08) 0%, transparent 50%),
+                radial-gradient(circle at 40% 20%, rgba(1, 143, 172, 0.637) 0%, transparent 50%);
+            pointer-events: none;
+            z-index: 0;
+            animation: gradientShift 8s ease infinite;
+        }
+
+        @keyframes gradientShift {
+            0%, 100% {
+                opacity: 1;
+            }
+            50% {
+                opacity: 0.8;
+            }
+        }
+
+        /* Main container */
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 20px;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Header/Navigation */
+        header {
+            padding: 30px 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            background: rgba(10, 10, 10, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 2px solid var(--accent-primary);
+            box-shadow: 0 10px 40px rgba(22, 70, 47, 0.1);
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: 900;
+            background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            letter-spacing: 2px;
+            animation: glow 2s ease-in-out infinite;
+        }
+
+        @keyframes glow {
+            0%, 100% {
+                text-shadow: 0 0 10px rgba(20, 8, 177, 0.884);
+                filter: drop-shadow(0 0 5px rgba(15, 15, 15, 0.3));
+            }
+            50% {
+                text-shadow: 0 0 20px rgba(25, 6, 133, 0.8);
+                filter: drop-shadow(0 0 10px rgba(0, 255, 136, 0.5));
+            }
+        }
+
+        nav {
+            display: flex;
+            gap: 30px;
+        }
+
+        nav button {
+            background: none;
+            border: none;
+            color: var(--text-secondary);
+            font-family: inherit;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            padding: 8px 16px;
+            border-radius: 6px;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            position: relative;
+        }
+
+        nav button::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(90deg, var(--accent-primary), var(--accent-secondary));
+            transition: width 0.3s ease;
+        }
+
+        nav button:hover {
+            color: var(--accent-primary);
+        }
+
+        nav button:hover::after {
+            width: 100%;
+        }
+
+        nav button.active {
+            color: var(--accent-primary);
+        }
+
+        nav button.active::after {
+            width: 100%;
+        }
+
+        /* Main sections */
+        section {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            padding: 80px 0;
+            opacity: 0;
+            animation: fadeIn 0.8s ease forwards;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Hero Section */
+        .hero {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: center;
+        }
+
+        .hero-text h1 {
+            font-size: 72px;
+            line-height: 1.2;
+            margin-bottom: 20px;
+            animation: slideInLeft 0.8s ease 0.2s both;
+        }
+
+        .hero-text h1 .gradient-text {
+            background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary), var(--accent-tertiary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        @keyframes slideInLeft {
+            from {
+                opacity: 0;
+                transform: translateX(-50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        .hero-text p {
+            font-size: 18px;
+            color: var(--text-secondary);
+            margin-bottom: 30px;
+            line-height: 1.8;
+            animation: slideInLeft 0.8s ease 0.3s both;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 20px;
+            animation: slideInLeft 0.8s ease 0.4s both;
+        }
+
+        .btn {
+            padding: 14px 32px;
+            border: none;
+            border-radius: 8px;
+            font-family: inherit;
+            font-size: 16px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
+            color: var(--bg-primary);
+            box-shadow: 0 10px 30px rgba(0, 255, 136, 0.3);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(0, 255, 136, 0.5);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--accent-tertiary);
+            border: 2px solid var(--accent-tertiary);
+        }
+
+        .btn-secondary:hover {
+            background: rgba(0, 212, 255, 0.1);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(0, 212, 255, 0.3);
+        }
+
+        .hero-image {
+            position: relative;
+            animation: float 3s ease-in-out infinite;
+        }
+
+        .hero-image::before {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary), var(--accent-tertiary));
+            border-radius: 12px;
+            opacity: 0.2;
+            animation: rotate 8s linear infinite;
+            z-index: -1;
+        }
+
+        @keyframes rotate {
+            from {
+                transform: rotate(0deg);
+            }
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0px);
+            }
+            50% {
+                transform: translateY(-20px);
+            }
+        }
+
+        .hero-image img {
+            width: 100%;
+            border-radius: 12px;
+            box-shadow: 0 30px 60px rgba(0, 255, 136, 0.2);
+        }
+
+        /* About Section */
+        .about-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: center;
+        }
+
+        .about-text h2 {
+            font-size: 48px;
+            margin-bottom: 30px;
+            background: linear-gradient(135deg, var(--accent-primary), var(--accent-tertiary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .about-text p {
+            font-size: 16px;
+            color: var(--text-secondary);
+            margin-bottom: 20px;
+            line-height: 1.8;
+        }
+
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
+            margin-top: 30px;
+        }
+
+        .skill-badge {
+            background: var(--bg-tertiary);
+            padding: 12px 20px;
+            border-radius: 20px;
+            text-align: center;
+            font-size: 13px;
+            font-weight: 600;
+            border: 1px solid var(--accent-primary);
+            color: var(--accent-primary);
+            transition: all 0.3s ease;
+        }
+
+        .skill-badge:hover {
+            background: var(--accent-primary);
+            color: var(--bg-primary);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(0, 255, 136, 0.3);
+        }
+
+        .about-visual {
+            position: relative;
+        }
+
+        .timeline {
+            position: relative;
+            padding-left: 30px;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 3px;
+            height: 100%;
+            background: linear-gradient(180deg, var(--accent-primary), var(--accent-secondary), transparent);
+        }
+
+        .timeline-item {
+            margin-bottom: 30px;
+            padding-bottom: 30px;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .timeline-item:last-child {
+            border-bottom: none;
+        }
+
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -9px;
+            top: 5px;
+            width: 18px;
+            height: 18px;
+            border-radius: 50%;
+            background: var(--accent-primary);
+            box-shadow: 0 0 15px var(--accent-primary);
+        }
+
+        .timeline-item h4 {
+            color: var(--accent-primary);
+            margin-bottom: 5px;
+            font-size: 16px;
+        }
+
+        .timeline-item p {
+            color: var(--text-secondary);
+            font-size: 14px;
+        }
+
+        /* Experience Section */
+        .experience-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 30px;
+        }
+
+        .experience-card {
+            background: var(--bg-secondary);
+            padding: 30px;
+            border-radius: 12px;
+            border: 1px solid var(--border-color);
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .experience-card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -50%;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle, rgba(0, 255, 136, 0.1) 0%, transparent 70%);
+            transition: all 0.4s ease;
+            pointer-events: none;
+        }
+
+        .experience-card:hover {
+            border-color: var(--accent-primary);
+            transform: translateY(-10px);
+            box-shadow: 0 20px 50px rgba(0, 255, 136, 0.15);
+        }
+
+        .experience-card:hover::before {
+            top: -25%;
+            right: -25%;
+        }
+
+        .experience-card h3 {
+            color: var(--accent-primary);
+            margin-bottom: 10px;
+            font-size: 18px;
+        }
+
+        .experience-card p {
+            color: var(--text-secondary);
+            font-size: 14px;
+            line-height: 1.6;
+        }
+
+        .date-badge {
+            display: inline-block;
+            background: var(--bg-tertiary);
+            color: var(--accent-tertiary);
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+
+        /* Hobbies Section */
+        .hobbies-header {
+            text-align: center;
+            margin-bottom: 60px;
+            animation: slideDown 0.8s ease;
+        }
+
+        .hobbies-header h2 {
+            font-size: 48px;
+            background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary), var(--accent-tertiary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 20px;
+        }
+
+        .hobbies-header p {
+            font-size: 18px;
+            color: var(--text-secondary);
+        }
+
+        @keyframes slideDown {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .hobbies-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+        }
+
+        .hobby-card {
+            background: var(--bg-secondary);
+            border: 2px solid var(--border-color);
+            border-radius: 12px;
+            padding: 35px 25px;
+            text-align: center;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            position: relative;
+            overflow: hidden;
+            cursor: pointer;
+        }
+
+        .hobby-card::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary), var(--accent-tertiary));
+            opacity: 0;
+            transition: opacity 0.4s ease;
+            z-index: -1;
+        }
+
+        .hobby-card:hover {
+            border-color: var(--accent-primary);
+            transform: translateY(-15px) scale(1.05);
+            box-shadow: 0 30px 60px rgba(0, 255, 136, 0.2);
+        }
+
+        .hobby-card:hover::before {
+            opacity: 0.05;
+        }
+
+        .hobby-icon {
+            font-size: 56px;
+            margin-bottom: 20px;
+            display: block;
+            animation: bounce 2s ease-in-out infinite;
+        }
+
+        @keyframes bounce {
+            0%, 100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-10px);
+            }
+        }
+
+        .hobby-card h3 {
+            color: var(--accent-primary);
+            font-size: 20px;
+            margin-bottom: 12px;
+        }
+
+        .hobby-card p {
+            color: var(--text-secondary);
+            font-size: 14px;
+            line-height: 1.6;
+        }
+
+        /* Contact Section */
+        .contact-wrapper {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+        }
+
+        .contact-info h2 {
+            font-size: 48px;
+            margin-bottom: 40px;
+            background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .contact-item {
+            margin-bottom: 30px;
+            padding-bottom: 30px;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .contact-item:last-child {
+            border-bottom: none;
+        }
+
+        .contact-label {
+            color: var(--accent-tertiary);
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+
+        .contact-value {
+            font-size: 18px;
+            color: var(--text-primary);
+        }
+
+        .contact-value a {
+            color: var(--accent-primary);
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .contact-value a:hover {
+            color: var(--accent-secondary);
+        }
+
+        .contact-form {
+            background: var(--bg-secondary);
+            padding: 40px;
+            border-radius: 12px;
+            border: 1px solid var(--border-color);
+        }
+
+        .form-group {
+            margin-bottom: 25px;
+        }
+
+        .form-group label {
+            display: block;
+            color: var(--accent-primary);
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 12px 16px;
+            background: var(--bg-primary);
+            border: 2px solid var(--border-color);
+            border-radius: 8px;
+            color: var(--text-primary);
+            font-family: inherit;
+            font-size: 14px;
+            transition: all 0.3s ease;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--accent-primary);
+            box-shadow: 0 0 15px rgba(0, 255, 136, 0.2);
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 150px;
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 40px 0;
+            border-top: 2px solid var(--border-color);
+            color: var(--text-secondary);
+            margin-top: 80px;
+        }
+
+        /* Responsive */
+        @media (max-width: 1024px) {
+            .hero, .about-content, .contact-wrapper {
+                grid-template-columns: 1fr;
+            }
+
+            .skills-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            section {
+                min-height: auto;
+                padding: 60px 0;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+                gap: 20px;
+            }
+
+            nav {
+                flex-wrap: wrap;
+                justify-content: center;
+                gap: 15px;
+            }
+
+            .hero-text h1 {
+                font-size: 42px;
+            }
+
+            .hobbies-header h2, .about-text h2, .contact-info h2 {
+                font-size: 32px;
+            }
+
+            .skills-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .experience-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .hobbies-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .cta-buttons {
+                flex-direction: column;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero-text h1 {
+                font-size: 32px;
+            }
+
+            nav button {
+                padding: 6px 12px;
+                font-size: 11px;
+            }
+
+            .hobbies-grid, .skills-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .contact-form {
+                padding: 25px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">Juma bRUCE</div>
+                <nav>
+                    <button class="nav-btn active" data-section="home">Home</button>
+                    <button class="nav-btn" data-section="about">About</button>
+                    <button class="nav-btn" data-section="experience">Experience</button>
+                    <button class="nav-btn" data-section="hobbies">Hobbies</button>
+                    <button class="nav-btn" data-section="contact">Contact</button>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <!-- Home Section -->
+        <section id="home" class="active">
+            <div class="container">
+                <div class="hero">
+                    <div class="hero-text">
+                        <h1>Hey, I'm <span class="gradient-text">Bruce</span></h1>
+                        <p>A Software Engineer with a passion for building innovative solutions. I love coding, exploring new technologies, and turning ideas into reality. Currently studying at Kisii University, diving deep into software engineering fundamentals.</p>
+                        <div class="cta-buttons">
+                            <button class="btn btn-primary" onclick="scrollToSection('contact')">Get In Touch</button>
+                            <button class="btn btn-secondary" onclick="scrollToSection('about')">Learn More</button>
+                        </div>
+                    </div>
+                    <div class="hero-image">
+                        <img src="myphoto.jpg" alt="Bruce Juma">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- About Section -->
+        <section id="about">
+            <div class="container">
+                <div class="about-content">
+                    <div class="about-text">
+                        <h2>About Me</h2>
+                        <p>I come from a background rooted in curiosity and a passion for technology. Growing up, I was fascinated by how computers work, which naturally led me to pursue software engineering.</p>
+                        <p>My course covers programming, data structures, algorithms, networking, and DBMS. I'm skilled in languages like C, Java, and web technologies including HTML, CSS, and JavaScript.</p>
+                        <p>After graduation, I aim to work as a Software Developer in a reputable tech company, contributing to innovative solutions. I also aspire to start my own tech startup and create products that make a difference.</p>
+                        <div class="skills-grid">
+                            <div class="skill-badge">C Programming</div>
+                            <div class="skill-badge">Java</div>
+                            <div class="skill-badge">HTML/CSS</div>
+                            <div class="skill-badge">JavaScript</div>
+                            <div class="skill-badge">Networking</div>
+                            <div class="skill-badge">DBMS</div>
+                        </div>
+                    </div>
+                    <div class="about-visual">
+                        <h3 style="color: var(--accent-primary); margin-bottom: 30px;">Education Timeline</h3>
+                        <div class="timeline">
+                            <div class="timeline-item">
+                                <h4>2019 - 2023</h4>
+                                <p><strong>Ambira High School</strong> - Certificate of Secondary Education</p>
+                            </div>
+                            <div class="timeline-item">
+                                <h4>2023 - 2024</h4>
+                                <p><strong>City Computer Techs</strong> - Certificate in Basic Computer Education</p>
+                            </div>
+                            <div class="timeline-item">
+                                <h4>2024 - Present</h4>
+                                <p><strong>Kisii University</strong> - Dean's List Award (2024)</p>
+                            </div>
+                            <div class="timeline-item">
+                                <h4>2025</h4>
+                                <p><strong>Global Hackathon</strong> - Best Innovative Solution</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Experience Section -->
+        <section id="experience">
+            <div class="container">
+                <h2 style="font-size: 48px; margin-bottom: 60px; background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">My Experience</h2>
+                <div class="experience-grid">
+                    <div class="experience-card">
+                        <div class="date-badge">2019 - 2023</div>
+                        <h3>Secondary Education</h3>
+                        <p>Ambira High School provided me with a strong foundation in academics and critical thinking skills that prepared me for higher education.</p>
+                    </div>
+                    <div class="experience-card">
+                        <div class="date-badge">2023 - 2024</div>
+                        <h3>Computer Training</h3>
+                        <p>City Computer Techs gave me hands-on experience in basic computer education and fundamentals of IT, accelerating my tech journey.</p>
+                    </div>
+                    <div class="experience-card">
+                        <div class="date-badge">2024 - Present</div>
+                        <h3>Software Engineering</h3>
+                        <p>At Kisii University, I'm diving deep into software engineering with courses in programming, algorithms, networking, and database management.</p>
+                    </div>
+                    <div class="experience-card">
+                        <div class="date-badge">2025</div>
+                        <h3>Hackathon Winner</h3>
+                        <p>Won "Best Innovative Solution" at Global Hackathon, demonstrating my ability to solve real-world problems under pressure.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Hobbies Section -->
+        <section id="hobbies">
+            <div class="container">
+                <div class="hobbies-header">
+                    <h2>My Hobbies & Passions</h2>
+                    <p>When I'm not coding, you'll find me doing these amazing things</p>
+                </div>
+                <div class="hobbies-grid">
+                    <div class="hobby-card">
+                        <span class="hobby-icon">📚</span>
+                        <h3>Reading</h3>
+                        <p>Tech books, science fiction, and personal development guides that fuel my mind</p>
+                    </div>
+                    <div class="hobby-card">
+                        <span class="hobby-icon">💻</span>
+                        <h3>Coding</h3>
+                        <p>Building side projects and exploring new programming languages and frameworks</p>
+                    </div>
+                    <div class="hobby-card">
+                        <span class="hobby-icon">⚽</span>
+                        <h3>Football</h3>
+                        <p>Weekend games with friends to stay active and maintain a healthy lifestyle</p>
+                    </div>
+                    <div class="hobby-card">
+                        <span class="hobby-icon">📸</span>
+                        <h3>Photography</h3>
+                        <p>Capturing moments and landscapes through my lens to tell visual stories</p>
+                    </div>
+                    <div class="hobby-card">
+                        <span class="hobby-icon">✈️</span>
+                        <h3>Travelling</h3>
+                        <p>Exploring new cultures and places to broaden my perspective and experience</p>
+                    </div>
+                    <div class="hobby-card">
+                        <span class="hobby-icon">🔐</span>
+                        <h3>Pentesting</h3>
+                        <p>Ethical hacking and security research to find and fix vulnerabilities</p>
+                    </div>
+                    <div class="hobby-card">
+                        <span class="hobby-icon">🏊</span>
+                        <h3>Swimming</h3>
+                        <p>A refreshing way to stay fit and clear my mind from daily challenges</p>
+                    </div>
+                    <div class="hobby-card">
+                        <span class="hobby-icon">🎮</span>
+                        <h3>E-Football Mobile</h3>
+                        <p>Competitive mobile gaming and strategic gameplay that keeps my reflexes sharp</p>
+                    </div>
+                    <div class="hobby-card">
+                        <span class="hobby-icon">🎨</span>
+                        <h3>Web Design</h3>
+                        <p>Creating beautiful user interfaces that merge art and technology seamlessly</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact Section -->
+        <section id="contact">
+            <div class="container">
+                <div class="contact-wrapper">
+                    <div class="contact-info">
+                        <h2>Get In Touch</h2>
+                        <div class="contact-item">
+                            <div class="contact-label">📞 Phone</div>
+                            <div class="contact-value"><a href="tel:+254795279462">+254 795 279 462</a></div>
+                        </div>
+                        <div class="contact-item">
+                            <div class="contact-label">📍 Location</div>
+                            <div class="contact-value">Kisii, Kenya</div>
+                        </div>
+                        <div class="contact-item">
+                            <div class="contact-label">📧 Email</div>
+                            <div class="contact-value"><a href="mailto:brucewily05@gmail.com">brucewily05@gmail.com</a></div>
+                        </div>
+                        <div class="contact-item">
+                            <div class="contact-label">🌐 GitHub</div>
+                            <div class="contact-value"><a href="#">github.com/brucedev</a></div>
+                        </div>
+                    </div>
+                    <div class="contact-form">
+                        <form id="contactForm">
+                            <div class="form-group">
+                                <label for="name">Your Name</label>
+                                <input type="text" id="name" name="name" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="email">Email Address</label>
+                                <input type="email" id="email" name="email" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="subject">Subject</label>
+                                <input type="text" id="subject" name="subject" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="message">Message</label>
+                                <textarea id="message" name="message" required></textarea>
+                            </div>
+                            <button type="submit" class="btn btn-primary" style="width: 100%;">Send Message</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2026 Bruce Juma. All rights reserved.</p>
+    </footer>
+
+    <script>
+        // Navigation
+        const navButtons = document.querySelectorAll('.nav-btn');
+        const sections = document.querySelectorAll('section');
+
+        navButtons.forEach(btn => {
+            btn.addEventListener('click', () => {
+                const targetSection = btn.dataset.section;
+                scrollToSection(targetSection);
+            });
+        });
+
+        function scrollToSection(sectionId) {
+            const section = document.getElementById(sectionId);
+            if (section) {
+                section.scrollIntoView({ behavior: 'smooth' });
+                updateActiveNav(sectionId);
+            }
+        }
+
+        function updateActiveNav(sectionId) {
+            navButtons.forEach(btn => {
+                btn.classList.remove('active');
+                if (btn.dataset.section === sectionId) {
+                    btn.classList.add('active');
+                }
+            });
+        }
+
+        // Detect scroll and update active nav
+        window.addEventListener('scroll', () => {
+            let current = '';
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.clientHeight;
+                if (pageYOffset >= sectionTop - 200) {
+                    current = section.getAttribute('id');
+                }
+            });
+            updateActiveNav(current);
+        });
+
+        // Form submission
+        document.getElementById('contactForm').addEventListener('submit', (e) => {
+            e.preventDefault();
+            const formData = {
+                name: document.getElementById('name').value,
+                email: document.getElementById('email').value,
+                subject: document.getElementById('subject').value,
+                message: document.getElementById('message').value
+            };
+            console.log('Form submitted:', formData);
+            alert('Message sent successfully! 🚀');
+            document.getElementById('contactForm').reset();
+        });
+    </script>
+</body>
+</html>
